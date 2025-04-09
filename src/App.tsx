@@ -222,7 +222,6 @@ function App() {
                               highlightDispatch({type: "update",payload: [rowIndex]})
                             }}>{rowIndex + 1}</th>
                             {row.map((cell, cellIndex) => {
-                              console.log(cell, colorScale(cell))
                               return (
                                 <td key={cellIndex} onMouseEnter={() => {
                                   highlightDispatch({type: "update",payload: [rowIndex, cellIndex]})
