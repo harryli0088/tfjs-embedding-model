@@ -5,8 +5,8 @@ export type ModelType = use.UniversalSentenceEncoder
 
 export async function loadModel():Promise<ModelType> {
   return await use.load({
-    modelUrl: '/model/model.json',
-    vocabUrl: '/model/vocab.json',
+    modelUrl: import.meta.env.BASE_URL + 'model/model.json',
+    vocabUrl: import.meta.env.BASE_URL + 'model/vocab.json',
   });
 }
 
