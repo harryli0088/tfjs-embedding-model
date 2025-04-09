@@ -2,6 +2,8 @@
 
 This project experiments with using a TF.js text embedding model in the browser.
 
+Demo site: https://harryli0088.github.io/tfjs-embedding-model/
+
 ## Getting Started
 
 1. Install the packages
