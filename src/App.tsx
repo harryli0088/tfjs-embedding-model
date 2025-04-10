@@ -71,7 +71,7 @@ function highlightReducer(state:boolean[], action:HighlightAction) {
   throw Error('Unknown action.');
 }
 
-const colorScale = scaleLinear([0,0.75,1],["rgb(255,255,255)","rgb(52, 152, 219)","rgb(40, 116, 166)"])
+const colorScale = scaleLinear([0,75,100],["rgb(255,255,255)","rgb(52, 152, 219)","rgb(40, 116, 166)"])
 
 function App() {
   const { data: model, isLoading: modelIsLoading, error: modelLoadError } = useQuery({
@@ -91,7 +91,7 @@ function App() {
     "The Krusty Krab pizza is the best pizza",
     "Costco pizza is the best pizza",
     "Per my previous email...",
-    "Did you even read my last email...",
+    "If you'd use your eyes and read my last email...",
   ]);
   const [debouncedInputs] = useDebounce(inputs, 750);
 
@@ -154,12 +154,12 @@ function App() {
         <br/>
         
         <p>This project demonstrates using a TensorFlow.js text embedding model (<a href="https://github.com/tensorflow/tfjs-models/tree/master/universal-sentence-encoder" target='_blank'>Universal Sentence Encoder</a>) directly in the browser with no external API calls. Having a TF.js model in the browser means your data stays in the browser. Normally TF.js will request the model weights and vocabulary from a Google-hosted CDN, but this project hosts those files locally.</p>
-        <p>You can play around with the model by adding, editing, and removing input text strings. The cosine simliarity matrix visualizes the text embeddings similarity.</p>
+        <p>You can play around with the model by adding, editing, and removing input text strings. The cosine simliarity matrix visualizes the text embeddings similarity. Hover over a cell to highlight the corresponding input strings!</p>
         {modelIsLoading && <p>Loading model...</p>}
         {modelLoadError && <p>Loading model error: {modelLoadError.message}</p>}
       </Container>
 
-      <div style={{padding:"1rem"}}>
+      <div id="content-container">
         <Row>
           <Col sm={12} md={7}>
             <h4>Input Text</h4>
@@ -226,9 +226,9 @@ function App() {
                                 <td key={cellIndex} onMouseEnter={() => {
                                   highlightDispatch({type: "update",payload: [rowIndex, cellIndex]})
                                 }} style={{
-                                  color: rowIndex===cellIndex||cell<0.75 ? "#000" : "#fff",
+                                  color: rowIndex===cellIndex ? "#555" : cell<75 ? "#000" : "#fff",
                                   backgroundColor: rowIndex===cellIndex ? "#ddd" : colorScale(cell)
-                                }}>{cell===1?cell:cell.toFixed(2)}</td>
+                                }}>{cell}</td>
                               )
                             }
                             )}
@@ -244,11 +244,11 @@ function App() {
 
                 <p style={{marginBottom: 0}}><b>Color Scale:</b></p>
                 <div id="legend">
-                  <b>0</b>
+                  <b>0%</b>
                   &nbsp;
                   <div id="legend-bar"/>
                   &nbsp;
-                  <b>1</b>
+                  <b>100%</b>
                 </div>
                 <br/>
                 <br/>
